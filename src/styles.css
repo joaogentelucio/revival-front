@@ -94,3 +94,13 @@ footer{padding:20px;color:#7c8985}
 .profile-social-stats span{display:inline-flex;align-items:baseline;gap:6px;white-space:nowrap}
 .profile-social-stats strong{color:var(--navy);font-size:16px;font-weight:800}
 @media(max-width:700px){.profile-social-stats{margin:10px 0 18px;gap:18px}}
+
+/* Acesso às configurações na capa do perfil */
+.profile-banner{position:relative}
+.profile-settings-button{position:absolute;top:15px;right:15px;width:39px;height:39px;border:1px solid #ffffff80;border-radius:10px;background:#152c3b66;color:#fff;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.profile-settings-button:hover{background:#152c3bcc}
+.settings-heading{display:flex;align-items:center;gap:13px;padding-bottom:20px;border-bottom:1px solid #e9e8e1;color:var(--sage)}
+.settings-heading h1{font-size:22px;margin:0;color:var(--navy)}
+.settings-heading p{font-size:13px;margin:5px 0 0;color:var(--sage)}
+.settings-back{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid #d9e2d9;background:#fff;border-radius:9px;color:var(--navy)}
+.settings-content{padding-top:6px}.settings-content h3{font-size:16px;color:var(--navy)}

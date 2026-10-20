@@ -72,3 +72,14 @@ footer{padding:20px;color:#7c8985}
 .post-media img,.post-media video{display:block;width:auto;height:auto;max-width:100%;max-height:min(62dvh,650px);object-fit:contain}
 .post-head,.post-actions{min-width:0}
 @media(max-width:760px){.layout{max-width:100%;padding:0 10px;margin-top:12px}.main .post{padding:12px}.post-media{max-height:53dvh}.post-media img,.post-media video{max-height:53dvh}}
+
+
+/* Um post por área útil da viewport: cabeçalho e navegação descontados. */
+.main .post{box-sizing:border-box;max-height:calc(100dvh - 175px);display:flex;flex-direction:column;min-height:0}
+.main .post .post-head,.main .post .post-actions,.main .post .post-stats{flex-shrink:0}
+.main .post>p{flex-shrink:0;margin:12px 0;max-height:5.4em;overflow-y:auto}
+.main .post .post-media{flex:0 1 auto;min-height:0;max-height:min(35dvh,380px);margin:8px auto 12px}
+.main .post .post-media img,.main .post .post-media video{max-height:min(35dvh,380px);max-width:100%;width:auto;height:auto;object-fit:contain}
+.main .post .post-comments{overflow-y:auto;min-height:0}
+@media(max-width:760px){.main .post{max-height:calc(100dvh - 155px)}.main .post .post-media,.main .post .post-media img,.main .post .post-media video{max-height:32dvh}}
+@media(max-height:650px){.main .post{max-height:calc(100dvh - 135px)}.main .post .post-media,.main .post .post-media img,.main .post .post-media video{max-height:24dvh}}

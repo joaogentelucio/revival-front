@@ -242,3 +242,8 @@ footer{padding:20px;color:#7c8985}
 .friend-grid .friend>.friend-icon-actions{grid-row:3;margin:0;align-self:center}
 @media(max-width:730px){.friend-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:360px){.friend-grid{gap:8px}.friend-grid .friend{padding:12px 5px}}
+
+/* Descoberta: dimensão fixa, com espaço reservado para "Segue você" */
+.friend-grid .friend{grid-template-rows:54px 34px 18px 50px;min-height:210px;max-width:100%;overflow:hidden}
+.friend-grid .friend>.friend-icon-actions{grid-row:4}
+.friend-grid .friend>.friend-follows-you{grid-row:3;display:block;width:100%;max-width:100%;height:18px;line-height:18px;text-align:center;font-size:11px;color:var(--sage);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

@@ -154,3 +154,19 @@ footer{padding:20px;color:#7c8985}
 
 /* Abas de histórico com o mesmo tratamento visual de Conversas e Comunidades */
 .history-tabs{margin:2px 0 15px;padding-bottom:8px;gap:8px}.history-tabs button{font-size:13px}.history-grid{width:100%}@media(max-width:480px){.history-tabs{gap:2px}.history-tabs button{padding:11px 9px;font-size:12px}}
+
+/* Busca centralizada por perfis no topo de Recados */
+.recados-search-row{display:flex;align-items:center;justify-content:center;margin:0 0 18px;width:100%}
+.recados-search{display:flex;align-items:center;gap:10px;width:min(100%,460px);min-height:44px;padding:0 15px;border:1px solid #dfe6df;border-radius:12px;background:#f8faf7;color:var(--sage)}
+.recados-search:focus-within{border-color:var(--sage);box-shadow:0 0 0 3px #627e701a}
+.recados-search input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:var(--navy);font-size:13px}
+.recados-search input::-webkit-search-cancel-button{cursor:pointer}
+.user-search-results h2{font-size:15px;color:var(--navy);margin:10px 0 15px}
+.user-search-grid{display:grid;gap:8px}
+.user-search-result{display:flex;align-items:center;gap:10px;border:1px solid #e6eae4;padding:12px;border-radius:11px;flex-wrap:wrap}
+.user-search-result>div{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.user-search-result strong{font-size:13px;color:var(--navy)}
+.user-search-result small{font-size:11px;color:var(--sage)}
+.user-search-result .outline{white-space:nowrap}
+.no-users-found{font-size:13px;color:var(--sage);padding:16px 0}
+@media(max-width:550px){.recados-search-row{margin-bottom:12px}.user-search-result{gap:7px}.user-search-result .outline{font-size:10px;padding:7px}}

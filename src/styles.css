@@ -252,3 +252,22 @@ footer{padding:20px;color:#7c8985}
 
 /* Mensagens mais recentes no início das conversas */
 .chat-page-messages{justify-content:flex-start}
+
+/* Central de notificações da rede social */
+.header-alert{position:relative}
+.notification-badge{position:absolute;right:0;top:0;min-width:19px;height:19px;padding:0 4px;background:#b7753d;color:#fff;border-radius:12px;display:grid;place-items:center;font-size:10px;font-weight:800}
+.notification-center{position:absolute;top:calc(100% - 4px);right:20px;width:min(410px,calc(100vw - 24px));max-height:min(560px,75dvh);display:flex;flex-direction:column;background:#fff;border:1px solid #e3e8e2;border-radius:15px;box-shadow:0 16px 44px #172b4222;color:var(--navy);z-index:80;overflow:hidden}
+.notification-heading{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid #e9eee8;font-size:15px}
+.notification-heading button{border:0;background:transparent;display:flex;color:var(--sage);cursor:pointer}
+.notification-list{overflow-y:auto;min-height:0}
+.notification-empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:36px 25px;color:var(--sage)}
+.notification-empty strong{color:var(--navy);font-size:14px}.notification-empty p{font-size:12px;line-height:1.6;margin:0}
+.notification-item{width:100%;border:0;border-bottom:1px solid #eef0ec;background:white;padding:13px 15px;display:flex;align-items:flex-start;gap:12px;text-align:left;color:var(--navy);cursor:pointer}
+.notification-item.unread{background:#f2f6f0}.notification-item:hover{background:#e9f0e8}
+.notification-symbol{display:grid;place-items:center;flex:0 0 36px;height:36px;border-radius:11px;background:#e8eee7;color:var(--sage);font-size:17px}
+.notification-content{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;font-size:12px;line-height:1.4}
+.notification-content small{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--sage);font-size:11px}
+.notification-content time{color:#87978b;font-size:10px}
+.notification-unread-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:10px}
+.notification-read-all{width:100%;background:#fff;border:0;border-top:1px solid #e9eee8;padding:12px;color:var(--sage);font-size:12px;font-weight:700;cursor:pointer}
+@media(max-width:600px){.notification-center{right:12px;top:100%;max-height:70dvh}}

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { dailyVerse, bibleSource, todayKey, type BibleVerse } from './services/bibleService'
-import { Bell, Heart, Home, MessageCircle, Plus, Search, Send, Smile, Users } from 'lucide-react'
+import { Bell, Heart, Home, MessageCircle, Plus, Send, Smile, Users } from 'lucide-react'
 type Page = 'inicio'|'perfil'|'recados'
 type Post = {id:number;author:string;avatar:string;time:string;text:string;likes:number;liked?:boolean}
 type Community = {id:number;name:string;icon:string;members:string;joined:boolean}

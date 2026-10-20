@@ -170,3 +170,9 @@ footer{padding:20px;color:#7c8985}
 .user-search-result .outline{white-space:nowrap}
 .no-users-found{font-size:13px;color:var(--sage);padding:16px 0}
 @media(max-width:550px){.recados-search-row{margin-bottom:12px}.user-search-result{gap:7px}.user-search-result .outline{font-size:10px;padding:7px}}
+
+/* Topo integrado ao fundo da página */
+.topbar{background:var(--ivory);color:var(--navy);box-shadow:none;border-bottom:0}
+.top-inner .brand{color:var(--navy)}
+.header-create,.header-alert{color:var(--navy)}
+.header-create:hover,.header-alert:hover{background:#172b420d}

@@ -207,3 +207,6 @@ footer{padding:20px;color:#7c8985}
 .chat-page-messages>p{align-self:center;color:var(--sage);font-size:13px}
 .chat-page .chat-form{margin-top:auto}
 @media(max-width:700px){.chat-page{min-height:calc(100dvh - 170px)}.chat-page-header{padding:10px}.chat-page-messages{padding:12px}}
+
+/* Botão Amigos: estado ativo sem a barra dourada inferior */
+.friends-tabs-reordered .friends-tab-button.active::after,.friends-tabs-reordered .friends-tab-button.active::before{display:none!important;content:none!important}

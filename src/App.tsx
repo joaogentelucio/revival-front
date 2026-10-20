@@ -68,7 +68,7 @@ const filtered=useMemo(()=>posts.filter(p=>(p.author+p.text).toLowerCase().inclu
 const post=()=>{if(!draft.trim()&&!media)return;setPosts(p=>[{id:Date.now(),author:name,avatar:'✨',time:'agora',text:draft.trim(),likes:0,...(media?{media:media.url,mediaType:media.type}:{})},...p]);setDraft('');setMedia(null);setPostModal(false);setCreateMenu(false);setPage('inicio')}
 const selectMedia=(file?:File)=>{if(!file)return;setMediaError('');if(!file.type.startsWith('image/')&&!file.type.startsWith('video/')){setMediaError('Escolha uma imagem ou vídeo válido.');return}if(file.size>12*1024*1024){setMediaError('Para este protótipo, selecione arquivos de até 12 MB.');return}const reader=new FileReader();reader.onload=()=>setMedia({url:String(reader.result),type:file.type.startsWith('video/')?'video':'image',name:file.name});reader.onerror=()=>setMediaError('Não foi possível ler o arquivo.');reader.readAsDataURL(file)}
 const comment=(id:number)=>{const content=(commentDrafts[id]||'').trim();if(!content)return;setPosts(p=>p.map(x=>x.id===id?{...x,comments:[...(x.comments||[]),content]}:x));setCommentDrafts(d=>({...d,[id]:''}))}
-const changePage=(p:Page)=>{setPage(p);setSearch('')}
+const changePage=(p:Page)=>{if(p==='recados')setFriendTab('conversas');setPage(p);setSearch('')}
 const openProfileEditor=()=>{setEditName(name);setEditBio(bio);setEditing(true)}
 const saveProfileEditor=()=>{if(!editName.trim())return;setName(editName.trim());setBio(editBio.trim());setEditing(false)}
 const sendMessage=()=>{if(!chatText.trim())return;setMessages(old=>({...old,[chatFriend]:[...(old[chatFriend]||[]),chatText.trim()]}));setChatText('');setMessageTimes(t=>({...t,[chatFriend]:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}))}

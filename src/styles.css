@@ -151,3 +151,6 @@ footer{padding:20px;color:#7c8985}
 .history-detail-like{display:flex;gap:8px;align-items:center;color:var(--sage);font-size:13px;margin-top:12px}
 .history-close{position:absolute;top:8px;right:8px;z-index:2;background:#fff;border:0;border-radius:50%;padding:8px;display:flex}
 @media(max-width:500px){.history-grid{gap:2px}.history-likes{left:5px;bottom:5px;font-size:11px;padding:3px 5px}.history-likes svg{width:12px}.history-detail-modal{padding:16px}}
+
+/* Abas de histórico com o mesmo tratamento visual de Conversas e Comunidades */
+.history-tabs{margin:2px 0 15px;padding-bottom:8px;gap:8px}.history-tabs button{font-size:13px}.history-grid{width:100%}@media(max-width:480px){.history-tabs{gap:2px}.history-tabs button{padding:11px 9px;font-size:12px}}

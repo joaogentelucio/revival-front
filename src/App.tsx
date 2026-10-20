@@ -54,7 +54,7 @@ useEffect(()=>{if(!browserReminder||!verseEnabled||!verse||typeof Notification==
 const enableReminder=async()=>{if(typeof Notification==='undefined'){setVerseError('Este navegador não oferece notificações.');return}const permission=await Notification.requestPermission();if(permission==='granted')setBrowserReminder(true);else setVerseError('Permissão de notificações não concedida.')}
 const filtered=useMemo(()=>posts.filter(p=>(p.author+p.text).toLowerCase().includes(search.toLowerCase())),[posts,search])
 const post=()=>{if(!draft.trim())return;setPosts(p=>[{id:Date.now(),author:name,avatar:'✨',time:'agora',text:draft.trim(),likes:0},...p]);setDraft('')}
-const changePage=(p:Page)=>{setPage(p);setSearch('');if(p!=='recados')}
+const changePage=(p:Page)=>{setPage(p);setSearch('')}
 const sendMessage=()=>{if(!chatText.trim())return;setMessages(old=>({...old,[chatFriend]:[...(old[chatFriend]||[]),chatText.trim()]}));setChatText('')}
 return <div className="app">
 <header className="topbar"><div className="top-inner"><button className="header-create" type="button" aria-label="Criar publicação" title="Criar publicação" onClick={()=>changePage('inicio')}><Plus size={30}/></button><button className="brand" onClick={()=>changePage('inicio')} aria-label="Revival, voltar ao início">revival<span className="brand-dot">.</span></button><button className="header-alert" type="button" aria-label="Notificações" title="Notificações" aria-expanded={notifications} onClick={()=>setNotifications(n=>!n)}><Bell size={27}/></button>{notifications&&<div className="notification">Você está por dentro de tudo! Sem notificações novas.</div>}</div></header>

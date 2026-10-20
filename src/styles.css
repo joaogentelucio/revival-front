@@ -210,3 +210,6 @@ footer{padding:20px;color:#7c8985}
 
 /* Botão Amigos: estado ativo sem a barra dourada inferior */
 .friends-tabs-reordered .friends-tab-button.active::after,.friends-tabs-reordered .friends-tab-button.active::before{display:none!important;content:none!important}
+
+/* Perfis visitantes utilizam o mesmo layout sem controles de edição */
+.visitor-clickable{cursor:pointer}.visitor-clickable:hover{border-color:var(--sage);background:#fbfcf9}.visitor-clickable:focus-visible{outline:3px solid var(--gold);outline-offset:2px}.visitor-back{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;border:0;background:transparent;color:var(--sage);font-size:13px;font-weight:700;margin:0 0 4px;padding:8px 3px}.visitor-profile .profile-header{padding-right:12px}

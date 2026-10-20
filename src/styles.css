@@ -88,3 +88,9 @@ footer{padding:20px;color:#7c8985}
 .post-actions{display:flex;align-items:center;gap:12px}
 .post-actions button:first-child{flex:0 0 96px;width:96px;min-width:96px;justify-content:flex-start;white-space:nowrap}
 .post-actions button svg{flex-shrink:0}
+
+/* Seguidores e seguindo abaixo do cabeçalho do perfil */
+.profile-social-stats{display:flex;align-items:center;gap:22px;margin:0 20px 20px;padding:0 0 16px;border-bottom:1px solid #e9e8e1;color:var(--sage);font-size:13px}
+.profile-social-stats span{display:inline-flex;align-items:baseline;gap:6px;white-space:nowrap}
+.profile-social-stats strong{color:var(--navy);font-size:16px;font-weight:800}
+@media(max-width:700px){.profile-social-stats{margin:10px 0 18px;gap:18px}}

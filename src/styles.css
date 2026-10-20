@@ -224,3 +224,5 @@ footer{padding:20px;color:#7c8985}
 .friend-icon-button:hover,.friend-icon-button.following{background:#edf2eb;color:var(--navy)}
 .friend-icon-button.following span{font-size:20px;font-weight:700}
 .friend .friend-icon-actions button{margin:0}
+
+.community-clickable{cursor:pointer}.community-clickable:hover{background:#f8faf7;border-color:var(--sage)}.community-clickable:focus-visible{outline:2px solid var(--gold);outline-offset:2px}.community-clickable button:disabled{opacity:.65;cursor:default}

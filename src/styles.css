@@ -83,3 +83,8 @@ footer{padding:20px;color:#7c8985}
 .main .post .post-comments{overflow-y:auto;min-height:0}
 @media(max-width:760px){.main .post{max-height:calc(100dvh - 155px)}.main .post .post-media,.main .post .post-media img,.main .post .post-media video{max-height:32dvh}}
 @media(max-height:650px){.main .post{max-height:calc(100dvh - 135px)}.main .post .post-media,.main .post .post-media img,.main .post .post-media video{max-height:24dvh}}
+
+/* Ações do post: largura constante nos estados curtir/curtido */
+.post-actions{display:flex;align-items:center;gap:12px}
+.post-actions button:first-child{flex:0 0 96px;width:96px;min-width:96px;justify-content:flex-start;white-space:nowrap}
+.post-actions button svg{flex-shrink:0}

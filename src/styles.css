@@ -279,3 +279,8 @@ footer{padding:20px;color:#7c8985}
 \n.post-upload{width:100%;max-height:600px;object-fit:contain;display:block;margin:12px 0;border-radius:12px;background:#f7f5f0}.media-picker{display:grid;gap:7px;color:#172b42;font-size:13px;font-weight:700}.media-picker input{font:inherit;max-width:100%}\n
 /* Media thumbnails in own profile history */
 .history-tile .history-media{width:100%;height:100%;min-height:180px;max-height:340px;object-fit:cover;display:block;border-radius:inherit}
+
+/* Curtidas sobrepostas às fotos do histórico */
+.history-tile .history-photo{position:relative;width:100%;height:100%;min-height:180px;overflow:hidden}
+.history-tile .history-photo .history-media{width:100%;height:100%;object-fit:cover}
+.history-like-count{position:absolute;right:10px;bottom:10px;z-index:1;display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:9px;background:rgba(15,28,40,.78);color:white;font-size:12px;font-weight:700;line-height:1;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.2)}

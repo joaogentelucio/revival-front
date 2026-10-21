@@ -284,3 +284,12 @@ footer{padding:20px;color:#7c8985}
 .history-tile .history-photo{position:relative;width:100%;height:100%;min-height:180px;overflow:hidden}
 .history-tile .history-photo .history-media{width:100%;height:100%;object-fit:cover}
 .history-like-count{position:absolute;right:10px;bottom:10px;z-index:1;display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:9px;background:rgba(15,28,40,.78);color:white;font-size:12px;font-weight:700;line-height:1;pointer-events:none;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+
+/* Menu contextual das fotos do histórico */
+.history-photo-actions{position:absolute;top:8px;right:8px;z-index:4}
+.history-more{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border:0;border-radius:8px;background:rgba(18,31,45,.78);color:#fff;cursor:pointer}
+.history-more:hover,.history-more:focus-visible{background:#172b42;outline:2px solid #d5aa63;outline-offset:2px}
+.history-photo-menu{position:absolute;right:0;top:38px;min-width:184px;padding:5px;border-radius:10px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.23);z-index:5;border:1px solid #e2e8e2}
+.history-photo-menu button{display:flex;align-items:center;gap:9px;width:100%;border:0;background:transparent;color:#172b42;cursor:pointer;padding:10px 11px;text-align:left;border-radius:7px;font-size:12px;white-space:nowrap}
+.history-photo-menu button:hover{background:#edf2eb}.history-photo-menu .history-photo-delete{color:#b43d3d}.history-photo-menu .history-photo-delete:hover{background:#fff0ef}
+.history-tile,.history-photo{overflow:visible!important}

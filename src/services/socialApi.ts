@@ -1,6 +1,6 @@
 import {getToken} from './authService'
 const BASE=(import.meta.env.VITE_API_URL || '').replace(/\/$/,'')
-export type Person={id:string;name:string;handle:string;biography?:string|null;followsYou?:boolean;following?:boolean;followers?:number}
+export type Person={id:string;name:string;handle:string;biography?:string|null;followsYou?:boolean;following?:number;followers?:number}
 export type Post={id:string;authorId:string;authorName:string;authorHandle:string;text:string|null;createdAt:string;visibility:string;likes:number;liked:boolean;comments:number}
 export type Comment={id:string;authorId:string;authorName:string;text:string;parentId:string|null;createdAt:string}
 export type Community={id:string;name:string;handle:string;description:string|null;isPrivate:boolean;createdAt:string;members:number;joined:boolean;requested:boolean}

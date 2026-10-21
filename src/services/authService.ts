@@ -17,7 +17,7 @@ async function api<T>(route:string,options:RequestInit={}):Promise<T>{
   return response.json() as Promise<T>
 }
 export const authApi={
-  login:(email:string,password:string)=>api<AuthResult>('/api/v1/auth/login',{method:'POST',body:JSON.stringify({email,password})}),
+  login:(identifier:string,password:string)=>api<AuthResult>('/api/v1/auth/login',{method:'POST',body:JSON.stringify({email:identifier,password})}),
   register:(name:string,handle:string,email:string,password:string)=>api<AuthResult>('/api/v1/auth/register',{method:'POST',body:JSON.stringify({name,handle,email,password})}),
   me:()=>api<AuthUser>('/api/v1/auth/me')
 }

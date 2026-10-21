@@ -299,3 +299,10 @@ footer{padding:20px;color:#7c8985}
 .history-grid .history-photo{position:relative;isolation:isolate;overflow:visible}
 .history-grid .history-photo-actions{position:absolute;top:8px;right:8px;z-index:50;display:block;visibility:visible;opacity:1}
 .history-grid .history-more{width:36px;height:32px;padding:0;background:#172b42;color:#fff;border:1px solid rgba(255,255,255,.7);font-size:21px;box-shadow:0 2px 9px rgba(0,0,0,.35)}
+
+/* Botão discreto de opções nas miniaturas */
+.history-grid .history-photo-actions{top:5px;right:5px}
+.history-grid .history-more{width:23px;height:23px;min-width:23px;min-height:23px;padding:0;border:0;background:transparent;color:#fff;box-shadow:none;border-radius:5px;text-shadow:0 1px 3px rgba(0,0,0,.75)}
+.history-grid .history-more span{font-size:14px!important;font-weight:800!important;letter-spacing:0!important;line-height:1!important}
+.history-grid .history-more:hover,.history-grid .history-more:focus-visible{background:rgba(0,0,0,.15);outline:none;box-shadow:none}
+.history-grid .history-photo-menu{top:26px}

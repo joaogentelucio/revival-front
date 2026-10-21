@@ -1,6 +1,7 @@
 import {useEffect,useState,type FormEvent} from 'react'
 import {authApi,clearSession,getToken,tokenKey,type AuthUser} from './services/authService'
 import App from './App'
+import {removeWebPush} from './services/webPush'
 import { Eye, EyeOff, Dices } from 'lucide-react'
 
 export default function AuthGate(){
@@ -40,7 +41,7 @@ export default function AuthGate(){
     finally{setBusy(false)}
   }
   if(checking)return <div className="auth-shell"><div className="auth-card"><div className="auth-logo">revival<span>.</span></div><p>Validando sessão...</p></div></div>
-  if(user)return <><div className="auth-session"><span>@{user.handle}</span><button type="button" onClick={()=>{clearSession();setUser(null)}}>Sair</button></div><App key={user.id} authenticatedName={user.name} authenticatedHandle={user.handle} authenticatedId={user.id} authenticatedBiography={user.biography} /></>
+  if(user)return <><div className="auth-session"><span>@{user.handle}</span><button type="button" onClick={()=>{void removeWebPush().catch(()=>{}).finally(()=>{clearSession();setUser(null)})}}>Sair</button></div><App key={user.id} authenticatedName={user.name} authenticatedHandle={user.handle} authenticatedId={user.id} authenticatedBiography={user.biography} /></>
   return <main className="auth-shell"><section className="auth-card" aria-label={registering?'Cadastro':'Entrar no Revival'}>
     <div className="auth-logo">revival<span>.</span></div>
     <p className="auth-subtitle">Compartilhe sua fé e viva conexões verdadeiras.</p>

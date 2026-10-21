@@ -2,6 +2,7 @@ import {getToken} from './authService'
 const BASE=(import.meta.env.VITE_API_URL || '').replace(/\/$/,'')
 export type Person={id:string;name:string;handle:string;biography?:string|null;followsYou?:boolean;following?:number;followers?:number}
 export type Post={id:string;authorId:string;authorName:string;authorHandle:string;text:string|null;createdAt:string;visibility:string;likes:number;liked:boolean;comments:number;media?:{url:string;category:string}[]}
+export type PostLiker={id:string;name:string;handle:string;following:boolean}
 export type Comment={id:string;authorId:string;authorName:string;text:string;parentId:string|null;createdAt:string}
 export type Community={id:string;name:string;handle:string;description:string|null;isPrivate:boolean;createdAt:string;members:number;joined:boolean;requested:boolean}
 export type Conversation={id:string;lastActivity:string;lastMessage:string|null;participants:string|{id:string;name:string;handle:string}[]|null}
@@ -28,6 +29,7 @@ export const social={
  post:(text:string,uploadIds:string[]=[])=>request<{id:string}>('/api/v1/posts',{method:'POST',body:json({text,uploadIds,visibility:'publico'})}),
  deletePost:(id:string)=>request<void>('/api/v1/posts/'+id,{method:'DELETE'}),
  like:(id:string,liked:boolean)=>request<void>('/api/v1/posts/'+id+'/likes',{method:liked?'DELETE':'POST'}),
+ likers:(id:string)=>request<PostLiker[]>('/api/v1/posts/'+id+'/likes'),
  comments:(id:string)=>request<Comment[]>('/api/v1/posts/'+id+'/comments'),
  comment:(id:string,text:string)=>request('/api/v1/posts/'+id+'/comments',{method:'POST',body:json({text})}),
  discover:(q='')=>request<Person[]>('/api/v1/users/discover?q='+encodeURIComponent(q)+'&take=100'),

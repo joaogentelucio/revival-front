@@ -293,3 +293,9 @@ footer{padding:20px;color:#7c8985}
 .history-photo-menu button{display:flex;align-items:center;gap:9px;width:100%;border:0;background:transparent;color:#172b42;cursor:pointer;padding:10px 11px;text-align:left;border-radius:7px;font-size:12px;white-space:nowrap}
 .history-photo-menu button:hover{background:#edf2eb}.history-photo-menu .history-photo-delete{color:#b43d3d}.history-photo-menu .history-photo-delete:hover{background:#fff0ef}
 .history-tile,.history-photo{overflow:visible!important}
+
+/* Keep the photo menu visible above thumbnails regardless of image layout */
+.history-grid .history-tile{position:relative;isolation:isolate}
+.history-grid .history-photo{position:relative;isolation:isolate;overflow:visible}
+.history-grid .history-photo-actions{position:absolute;top:8px;right:8px;z-index:50;display:block;visibility:visible;opacity:1}
+.history-grid .history-more{width:36px;height:32px;padding:0;background:#172b42;color:#fff;border:1px solid rgba(255,255,255,.7);font-size:21px;box-shadow:0 2px 9px rgba(0,0,0,.35)}

@@ -1,7 +1,7 @@
 import {getToken} from './authService'
 const BASE=(import.meta.env.VITE_API_URL || '').replace(/\/$/,'')
 export type Person={id:string;name:string;handle:string;biography?:string|null;followsYou?:boolean;following?:number;followers?:number}
-export type Post={id:string;authorId:string;authorName:string;authorHandle:string;text:string|null;createdAt:string;visibility:string;likes:number;liked:boolean;comments:number}
+export type Post={id:string;authorId:string;authorName:string;authorHandle:string;text:string|null;createdAt:string;visibility:string;likes:number;liked:boolean;comments:number;media?:{url:string;category:string}[]}
 export type Comment={id:string;authorId:string;authorName:string;text:string;parentId:string|null;createdAt:string}
 export type Community={id:string;name:string;handle:string;description:string|null;isPrivate:boolean;createdAt:string;members:number;joined:boolean;requested:boolean}
 export type Conversation={id:string;lastActivity:string;lastMessage:string|null;participants:string|{id:string;name:string;handle:string}[]|null}
@@ -20,9 +20,11 @@ export async function request<T=unknown>(path:string,options:RequestInit={}):Pro
  return response.json() as Promise<T>
 }
 const json=(data:unknown)=>JSON.stringify(data)
+export const uploadFile=async(category:'image-pub'|'video-pub'|'avatar'|'background-photo',file:File)=>{const token=getToken();if(!token)throw new Error('Entre novamente.');const form=new FormData();form.append('file',file);const response=await fetch(BASE+'/api/v1/uploads/'+category,{method:'POST',headers:{Authorization:'Bearer '+token},body:form});if(!response.ok){const body=await response.json().catch(()=>null) as {error?:string}|null;throw new Error(body?.error||'Erro no envio do arquivo ('+response.status+').')}return response.json() as Promise<{id:string;url:string;category:string}>}
+export const mediaUrl=(url:string)=>BASE+url
 export const social={
  feed:(authorId?:string)=>request<Post[]>('/api/v1/posts?take=100'+(authorId?'&authorId='+encodeURIComponent(authorId):'')),
- post:(text:string)=>request<{id:string}>('/api/v1/posts',{method:'POST',body:json({text,visibility:'publico'})}),
+ post:(text:string,uploadIds:string[]=[])=>request<{id:string}>('/api/v1/posts',{method:'POST',body:json({text,uploadIds,visibility:'publico'})}),
  like:(id:string,liked:boolean)=>request<void>('/api/v1/posts/'+id+'/likes',{method:liked?'DELETE':'POST'}),
  comments:(id:string)=>request<Comment[]>('/api/v1/posts/'+id+'/comments'),
  comment:(id:string,text:string)=>request('/api/v1/posts/'+id+'/comments',{method:'POST',body:json({text})}),

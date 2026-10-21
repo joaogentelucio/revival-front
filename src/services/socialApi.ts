@@ -37,6 +37,7 @@ export const social={
  profile:(handle:string)=>request<Person>('/api/v1/profiles/'+encodeURIComponent(handle)),
  editProfile:(name:string,biography:string)=>request<void>('/api/v1/profiles/me',{method:'PUT',body:json({name,biography})}),
  follow:(id:string)=>request<void>('/api/v1/profiles/'+id+'/follow',{method:'POST'}),
+ publicConnections:(userId:string,kind:'following'|'followers')=>request<Person[]>('/api/v1/users/'+encodeURIComponent(userId)+'/'+kind),
  following:()=>request<Person[]>('/api/v1/users/me/following'),
  followers:()=>request<Person[]>('/api/v1/users/me/followers'),
  communities:()=>request<Community[]>('/api/v1/communities?take=100'),

@@ -339,3 +339,11 @@ footer{padding:20px;color:#7c8985}
 .main .post .feed-media-full{width:100%;max-width:100%;display:flex;align-items:center;justify-content:center;margin:12px 0;border-radius:12px;background:#111a23;overflow:hidden}
 .main .post .feed-media-full img,.main .post .feed-media-full video{display:block;width:auto;height:auto;max-width:100%;max-height:min(82dvh,980px);object-fit:contain;border-radius:0}
 @media(max-width:600px){.main .post .feed-media-full img,.main .post .feed-media-full video{max-height:78dvh}}
+
+
+/* Feed compacto: conteúdo adapta-se ao card, nunca o inverso. */
+.main .post.card{width:min(100%,440px);max-width:440px;min-width:0;margin-left:auto;margin-right:auto;box-sizing:border-box;overflow:hidden}
+.main .post .feed-media-full{width:100%;max-width:100%;aspect-ratio:4 / 5;max-height:none;min-height:0;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:10px;background:#111a23}
+.main .post .feed-media-full:has(video){aspect-ratio:9 / 16}
+.main .post .feed-media-full img,.main .post .feed-media-full video{display:block;width:100%;height:100%;min-width:0;min-height:0;max-width:100%;max-height:100%;object-fit:contain;border-radius:0}
+@media(max-width:480px){.main .post.card{width:100%;max-width:100%}}

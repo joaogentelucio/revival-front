@@ -24,7 +24,7 @@ const menu:{id:Page;label:string;Icon:typeof Home}[]=[{id:'inicio',label:'Iníci
 function makeHandle(value:string){return value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9_]/g,'').slice(0,36)}
 function communityIdentifier(c:Community){return c.handle||makeHandle(c.name)||'comunidade'+c.id}
 function Avatar({text,size='',presence}:{text:string;size?:string;presence?:'online'|'offline'}){return <span className={'avatar '+size+(presence?' presence-avatar '+presence:'')}>{text}</span>}
-export default function App(){
+export default function App({authenticatedName}:{authenticatedName:string}){
 const [page,setPage]=useState<Page>('inicio')
 const [creatingCommunity,setCreatingCommunity]=useState(false)
 const [communityName,setCommunityName]=useState('')
@@ -37,7 +37,7 @@ const [communityMessages,setCommunityMessages]=useState<Record<number,string[]>>
 const [visitedUser,setVisitedUser]=useState(friendNames[0])
 const [posts,setPosts]=useState(()=>saved('revival-posts',starterPosts))
 const [communities,setCommunities]=useState<Community[]>(()=>saved('revival-communities',starterCommunities))
-const [name,setName]=useState(()=>saved('revival-name','João Vitor'))
+const [name,setName]=useState(authenticatedName)
 const [bio,setBio]=useState(()=>saved('revival-bio','vivendo, aprendendo e colecionando boas histórias ✨'))
 const [followed,setFollowed]=useState<string[]>(()=>saved('revival-followed',[]))
 const [followersOfMe]=useState<string[]>(()=>saved('revival-followers-of-me',[]))

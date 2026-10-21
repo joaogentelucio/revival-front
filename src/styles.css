@@ -327,3 +327,9 @@ footer{padding:20px;color:#7c8985}
 .post-view-comments{padding:10px 18px;overflow-y:auto;max-height:135px}.post-view-comments p{margin:7px 0;font-size:13px}
 .post-view-comment-form{display:flex;gap:8px;padding:12px 18px;border-top:1px solid #e9eee8}.post-view-comment-form input{flex:1;min-width:0;padding:10px;border:1px solid #dce4dc;border-radius:9px}.post-view-comment-form button{background:#172b42;color:#fff;border:0;border-radius:9px;padding:0 15px;cursor:pointer}.post-view-comment-form button:disabled{opacity:.5}
 @media(max-width:600px){.post-view-backdrop{padding:10px}.post-view-modal{max-height:92dvh}.post-view-media img{max-height:43dvh}}
+
+/* Cantos arredondados nas miniaturas, sem cortar o menu de opções */
+.history-grid .history-tile{border-radius:12px}
+.history-grid .history-photo{border-radius:12px}
+.history-grid .history-photo>.history-media{border-radius:12px}
+.history-grid .history-photo-menu{border-radius:10px}

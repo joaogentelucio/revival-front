@@ -333,3 +333,9 @@ footer{padding:20px;color:#7c8985}
 .history-grid .history-photo{border-radius:12px}
 .history-grid .history-photo>.history-media{border-radius:12px}
 .history-grid .history-photo-menu{border-radius:10px}
+
+
+/* Feed: preserve each attachment's full aspect ratio, without cropping. */
+.main .post .feed-media-full{width:100%;max-width:100%;display:flex;align-items:center;justify-content:center;margin:12px 0;border-radius:12px;background:#111a23;overflow:hidden}
+.main .post .feed-media-full img,.main .post .feed-media-full video{display:block;width:auto;height:auto;max-width:100%;max-height:min(82dvh,980px);object-fit:contain;border-radius:0}
+@media(max-width:600px){.main .post .feed-media-full img,.main .post .feed-media-full video{max-height:78dvh}}

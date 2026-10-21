@@ -15,3 +15,11 @@
 
 ## Limites atuais
 O token de acesso dura 30 minutos e é salvo apenas na sessão da aba, por isso um novo login será necessário quando expirar. Refresh token, verificação de e-mail e recuperação de senha ainda não foram implementados. O restante do feed e recados continua demonstrativo/local; **somente cadastro, login e validação de sessão utilizam a API nesta entrega**.
+
+## URLs oficiais de teste
+- Frontend: https://revival-front.vercel.app
+- API: https://revival-backend-ckqp.onrender.com
+- O arquivo `.env` versionado já contém a URL da API. O Vite lê esse arquivo durante o build.
+- Variáveis `VITE_API_URL` definidas na Vercel têm precedência sobre `.env`; confirme que não estejam vazias ou incorretas.
+- O backend já autoriza a origem Web acima por padrão. Se `Cors__AllowedOrigins__0` estiver configurada no Render, mantenha o valor `https://revival-front.vercel.app`.
+- Reimplante ambos os serviços após alterações.

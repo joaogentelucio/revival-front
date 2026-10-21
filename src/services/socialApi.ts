@@ -20,10 +20,11 @@ export async function request<T=unknown>(path:string,options:RequestInit={}):Pro
  return response.json() as Promise<T>
 }
 const json=(data:unknown)=>JSON.stringify(data)
+const normalizePosts=(items:Post[]):Post[]=>items.map(post=>{const raw=(post as Post&{media?:unknown}).media;let media:unknown=raw;if(typeof media==='string'){try{media=JSON.parse(media)}catch{media=[]}}return {...post,media:Array.isArray(media)?media.filter((item):item is {url:string;category:string}=>!!item&&typeof item.url==='string'&&typeof item.category==='string'):[]}})
 export const uploadFile=async(category:'image-pub'|'video-pub'|'avatar'|'background-photo',file:File)=>{const token=getToken();if(!token)throw new Error('Entre novamente.');const form=new FormData();form.append('file',file);const response=await fetch(BASE+'/api/v1/uploads/'+category,{method:'POST',headers:{Authorization:'Bearer '+token},body:form});if(!response.ok){const body=await response.json().catch(()=>null) as {error?:string}|null;throw new Error(body?.error||'Erro no envio do arquivo ('+response.status+').')}return response.json() as Promise<{id:string;url:string;category:string}>}
 export const mediaUrl=(url:string)=>BASE+url
 export const social={
- feed:(authorId?:string)=>request<Post[]>('/api/v1/posts?take=100'+(authorId?'&authorId='+encodeURIComponent(authorId):'')),
+ feed:async(authorId?:string)=>normalizePosts(await request<Post[]>('/api/v1/posts?take=100'+(authorId?'&authorId='+encodeURIComponent(authorId):''))),
  post:(text:string,uploadIds:string[]=[])=>request<{id:string}>('/api/v1/posts',{method:'POST',body:json({text,uploadIds,visibility:'publico'})}),
  like:(id:string,liked:boolean)=>request<void>('/api/v1/posts/'+id+'/likes',{method:liked?'DELETE':'POST'}),
  comments:(id:string)=>request<Comment[]>('/api/v1/posts/'+id+'/comments'),

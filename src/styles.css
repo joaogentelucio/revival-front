@@ -306,3 +306,6 @@ footer{padding:20px;color:#7c8985}
 .history-grid .history-more span{font-size:14px!important;font-weight:800!important;letter-spacing:0!important;line-height:1!important}
 .history-grid .history-more:hover,.history-grid .history-more:focus-visible{background:rgba(0,0,0,.15);outline:none;box-shadow:none}
 .history-grid .history-photo-menu{top:26px}
+
+/* Indicador visual de publicação com múltiplas fotos */
+.history-grid .history-carousel-indicator{position:absolute;top:8px;left:8px;z-index:3;display:flex;align-items:center;justify-content:center;width:23px;height:23px;color:#fff;pointer-events:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,.75))}

@@ -1,6 +1,7 @@
 import {useEffect,useState,type FormEvent} from 'react'
 import {authApi,clearSession,getToken,tokenKey,type AuthUser} from './services/authService'
 import App from './App'
+import { Eye, EyeOff } from 'lucide-react'
 
 export default function AuthGate(){
   const [user,setUser]=useState<AuthUser|null>(null)
@@ -10,7 +11,7 @@ export default function AuthGate(){
   const [handle,setHandle]=useState('')
   const [email,setEmail]=useState('')
   const [password,setPassword]=useState('')
-  const [confirm,setConfirm]=useState('')
+  const [showPassword,setShowPassword]=useState(false)
   const [busy,setBusy]=useState(false)
   const [error,setError]=useState('')
   useEffect(()=>{
@@ -21,8 +22,7 @@ export default function AuthGate(){
   },[])
   const submit=async(e:FormEvent<HTMLFormElement>)=>{
     e.preventDefault();setError('')
-    if(registering && password!==confirm){setError('As senhas não coincidem.');return}
-    if(registering && (password.length<12 || password.length>128)){setError('A senha deve ter entre 12 e 128 caracteres.');return}
+    if(registering && (password.length<6 || password.length>128 || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/[0-9]/.test(password) || !/[^a-zA-Z0-9]/.test(password))){setError('A senha deve ter pelo menos 6 caracteres, com letras minúsculas, maiúsculas, números e símbolos.');return}
     setBusy(true)
     try{
       const response=registering?await authApi.register(name.trim(),handle.trim().replace(/^@/,''),email.trim(),password):await authApi.login(email.trim(),password)
@@ -34,7 +34,7 @@ export default function AuthGate(){
         clearSession()
         throw e
       }
-      setPassword('');setConfirm('')
+      setPassword('')
     }catch(err){setError(err instanceof Error?err.message:'Não foi possível autenticar.')}
     finally{setBusy(false)}
   }
@@ -49,12 +49,11 @@ export default function AuthGate(){
       {registering&&<><label htmlFor="auth-name">Nome completo</label><input id="auth-name" autoComplete="name" required minLength={2} maxLength={100} value={name} onChange={e=>setName(e.target.value)} placeholder="Seu nome" />
       <label htmlFor="auth-handle">Identificador</label><input id="auth-handle" autoComplete="username" required minLength={3} maxLength={40} pattern="[A-Za-z0-9_.]{3,40}" title="Use de 3 a 40 letras, números, ponto ou underline" value={handle} onChange={e=>setHandle(e.target.value.replace(/^@/,''))} placeholder="seu.usuario" /></>}
       <label htmlFor="auth-email">E-mail</label><input id="auth-email" type="email" autoComplete="email" required maxLength={254} value={email} onChange={e=>setEmail(e.target.value)} placeholder="voce@exemplo.com" />
-      <label htmlFor="auth-password">Senha</label><input id="auth-password" type="password" autoComplete={registering?'new-password':'current-password'} required minLength={registering?12:1} maxLength={128} value={password} onChange={e=>setPassword(e.target.value)} placeholder={registering?'Mínimo de 12 caracteres':'Sua senha'} />
-      {registering&&<><label htmlFor="auth-confirm">Confirme sua senha</label><input id="auth-confirm" type="password" autoComplete="new-password" required minLength={12} maxLength={128} value={confirm} onChange={e=>setConfirm(e.target.value)}/></>}
-      {error&&<div role="alert" className="auth-error">{error}</div>}
+      <label htmlFor="auth-password">Senha</label><div className="auth-password-field"><input id="auth-password" type={showPassword?'text':'password'} autoComplete={registering?'new-password':'current-password'} required minLength={registering?6:1} maxLength={128} value={password} onChange={e=>setPassword(e.target.value)} placeholder={registering?'Mín. 6 caracteres, Aa1!':'Sua senha'} /><button type="button" className="auth-password-toggle" title={showPassword?'Ocultar senha':'Mostrar senha'} aria-label={showPassword?'Ocultar senha':'Mostrar senha'} aria-pressed={showPassword} onClick={()=>setShowPassword(value=>!value)}>{showPassword?<EyeOff size={19}/>:<Eye size={19}/>}</button></div>
+            {error&&<div role="alert" className="auth-error">{error}</div>}
       <button className="auth-submit" type="submit" disabled={busy}>{busy?'Aguarde...':registering?'Criar conta':'Entrar'}</button>
     </form>
-    <p className="auth-switch">{registering?'Já tem conta?':'Ainda não tem conta?'} <button type="button" onClick={()=>{setRegistering(v=>!v);setError('');setPassword('');setConfirm('')}}>{registering?'Entrar':'Cadastre-se'}</button></p>
+    <p className="auth-switch">{registering?'Já tem conta?':'Ainda não tem conta?'} <button type="button" onClick={()=>{setRegistering(v=>!v);setError('');setPassword('')}}>{registering?'Entrar':'Cadastre-se'}</button></p>
     <small>Seus dados de conta são registrados na API do Revival. A autenticação ainda está em fase de testes.</small>
   </section></main>
 }

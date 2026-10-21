@@ -19,3 +19,9 @@
 .auth-session{position:fixed;bottom:83px;right:14px;z-index:100;display:flex;gap:8px;align-items:center;padding:7px 9px;background:#fff;border:1px solid #e7e7df;border-radius:10px;box-shadow:0 3px 15px #172b4216;color:#627e70;font-size:11px}
 .auth-session button{border:0;background:#172b42;color:#fff;border-radius:7px;padding:6px 10px}
 @media(max-width:480px){.auth-card{padding:25px 20px}.auth-session{bottom:75px}}
+
+.auth-password-field{position:relative;width:100%}
+.auth-card .auth-password-field input{padding-right:49px}
+.auth-password-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;border-radius:8px;color:#627e70;cursor:pointer}
+.auth-password-toggle:hover{background:#edf1ed;color:#172b42}
+.auth-password-toggle:focus-visible{outline:2px solid #d5aa63;outline-offset:1px}

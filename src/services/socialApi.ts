@@ -26,6 +26,7 @@ export const mediaUrl=(url:string)=>BASE+url
 export const social={
  feed:async(authorId?:string)=>normalizePosts(await request<Post[]>('/api/v1/posts?take=100'+(authorId?'&authorId='+encodeURIComponent(authorId):''))),
  post:(text:string,uploadIds:string[]=[])=>request<{id:string}>('/api/v1/posts',{method:'POST',body:json({text,uploadIds,visibility:'publico'})}),
+ deletePost:(id:string)=>request<void>('/api/v1/posts/'+id,{method:'DELETE'}),
  like:(id:string,liked:boolean)=>request<void>('/api/v1/posts/'+id+'/likes',{method:liked?'DELETE':'POST'}),
  comments:(id:string)=>request<Comment[]>('/api/v1/posts/'+id+'/comments'),
  comment:(id:string,text:string)=>request('/api/v1/posts/'+id+'/comments',{method:'POST',body:json({text})}),

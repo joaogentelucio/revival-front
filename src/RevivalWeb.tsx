@@ -38,8 +38,8 @@ export default function App({authenticatedName,authenticatedHandle,authenticated
  useEffect(()=>{bottom.current?.scrollIntoView({behavior:'auto',block:'end'})},[messages.length])
  const run=async(fn:()=>Promise<unknown>,done?:()=>void)=>{if(busy)return;setBusy(true);setError('');try{await fn();done?.()}catch(e){fail(e)}finally{setBusy(false)}}
  const postLike=(p:Post)=>void run(()=>social.like(p.id,p.liked),()=>setPosts(old=>old.map(x=>x.id===p.id?{...x,liked:!x.liked,likes:x.likes+(x.liked?-1:1)}:x)))
- const toggleComments=async(id:string)=>{if(openedComments.includes(id)){setOpenedComments(v=>v.filter(x=>x!==id));return}setOpenedComments(v=>[...v,id]);try{setComments(v=>({...v,[id]:await social.comments(id)}))}catch(e){fail(e)}}
- const sendComment=(id:string)=>void run(async()=>{await social.comment(id,(commentDraft[id]||'').trim());setComments(v=>({...v,[id]:await social.comments(id)}));setPosts(v=>v.map(p=>p.id===id?{...p,comments:p.comments+1}:p));setCommentDraft(v=>({...v,[id]:''}))})
+ const toggleComments=async(id:string)=>{if(openedComments.includes(id)){setOpenedComments(v=>v.filter(x=>x!==id));return}setOpenedComments(v=>[...v,id]);try{const updatedComments=await social.comments(id);setComments(v=>({...v,[id]:updatedComments}))}catch(e){fail(e)}}
+ const sendComment=(id:string)=>void run(async()=>{await social.comment(id,(commentDraft[id]||'').trim());const updatedComments=await social.comments(id);setComments(v=>({...v,[id]:updatedComments}));setPosts(v=>v.map(p=>p.id===id?{...p,comments:p.comments+1}:p));setCommentDraft(v=>({...v,[id]:''}))})
  const visit=async(p:Person)=>{setVisitor(p);setVisitorPosts([]);go('visitante');try{const [profile,list]=await Promise.all([social.profile(p.handle),social.feed(p.id)]);setVisitor(profile);setVisitorPosts(list)}catch(e){fail(e)}}
  const start=async(p:Person)=>{try{const c=await social.startConversation(p.id);openChat(c.id,p.name)}catch(e){fail(e)}}
  const openChat=(id:string,n:string)=>{setSelected(id);setChatName(n);setMessages([]);setDraft('');setReply(null);go('chat')}

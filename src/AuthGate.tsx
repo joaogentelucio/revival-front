@@ -1,5 +1,5 @@
 import {useEffect,useState,type FormEvent} from 'react'
-import {authApi,clearSession,getToken,tokenKey,type AuthUser} from './services/authService'
+import {authApi,clearSession,getToken,saveSession,logoutSession,type AuthUser} from './services/authService'
 import App from './App'
 import {removeWebPush} from './services/webPush'
 import { Eye, EyeOff, Dices } from 'lucide-react'
@@ -18,7 +18,7 @@ export default function AuthGate(){
   const [error,setError]=useState('')
   useEffect(()=>{
     let active=true
-    if(!getToken()){setChecking(false);return}
+    if(!getToken()&&!sessionStorage.getItem('revival-refresh-token')){setChecking(false);return}
     authApi.me().then(profile=>{if(active)setUser(profile)}).catch(()=>{if(active)clearSession()}).finally(()=>{if(active)setChecking(false)})
     return()=>{active=false}
   },[])
@@ -28,7 +28,7 @@ export default function AuthGate(){
     setBusy(true)
     try{
       const response=registering?await authApi.register(name.trim(),handle.trim().replace(/^@/,''),email.trim(),password):await authApi.login(email.trim(),password)
-      sessionStorage.setItem(tokenKey,response.accessToken)
+      saveSession(response)
       try{
         const profile=await authApi.me()
         setUser(profile)
@@ -41,7 +41,7 @@ export default function AuthGate(){
     finally{setBusy(false)}
   }
   if(checking)return <div className="auth-shell"><div className="auth-card"><div className="auth-logo">revival<span>.</span></div><p>Validando sessão...</p></div></div>
-  if(user)return <><div className="auth-session"><span>@{user.handle}</span><button type="button" onClick={()=>{void removeWebPush().catch(()=>{}).finally(()=>{clearSession();setUser(null)})}}>Sair</button></div><App key={user.id} authenticatedName={user.name} authenticatedHandle={user.handle} authenticatedId={user.id} authenticatedBiography={user.biography} /></>
+  if(user)return <><div className="auth-session"><span>@{user.handle}</span><button type="button" onClick={()=>{void removeWebPush().catch(()=>{}).finally(()=>{void logoutSession().finally(()=>setUser(null))})}}>Sair</button></div><App key={user.id} authenticatedName={user.name} authenticatedHandle={user.handle} authenticatedId={user.id} authenticatedBiography={user.biography} /></>
   return <main className="auth-shell"><section className="auth-card" aria-label={registering?'Cadastro':'Entrar no Revival'}>
     <div className="auth-logo">revival<span>.</span></div>
     <p className="auth-subtitle">Compartilhe sua fé e viva conexões verdadeiras.</p>

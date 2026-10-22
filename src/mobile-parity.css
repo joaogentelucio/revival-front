@@ -1,0 +1,81 @@
+/* Revival Web: design tokens aligned with revival-mobile/src/theme */
+:root {
+  --rev-background:#F7F5F0;--rev-surface:#FFFFFF;--rev-text:#172B42;
+  --rev-secondary:#627E70;--rev-gold:#D5AA63;--rev-muted:#89948C;
+  --rev-border:#E9E4DA;--rev-soft:#EDF2EB;
+  --navy:var(--rev-text);--sage:var(--rev-secondary);--gold:var(--rev-gold);--ivory:var(--rev-background);
+  color-scheme:light;
+}
+body,#root,.app{background:var(--rev-background);color:var(--rev-text)}
+.card,.publication-modal,.notification,.create-menu,.conversation-list button,.friend,.community,
+.post,.page-card,.right-card,.profile-card,.auth-card{background:var(--rev-surface);border-color:var(--rev-border);color:var(--rev-text)}
+.card{box-shadow:none}
+.topbar{background:var(--rev-background);color:var(--rev-text);border-bottom:1px solid var(--rev-border);box-shadow:none}
+.top-inner{height:80px;padding-inline:16px}
+.top-inner .brand{color:var(--rev-text);font-family:Georgia,'Times New Roman',serif;font-size:40px;letter-spacing:-1.5px}
+.top-inner .brand-dot{color:var(--rev-gold)}
+.header-create,.header-alert{color:var(--rev-text);border-radius:10px}
+.header-create:hover,.header-alert:hover{background:var(--rev-soft)}
+.bottom-navigation{background:var(--rev-background);border-top:1px solid var(--rev-border);box-shadow:none;padding-top:7px}
+.bottom-navigation-inner{max-width:700px;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.bottom-navigation button{color:var(--rev-secondary);min-height:56px;font-size:10px;font-weight:700;border-radius:8px}
+.bottom-navigation button.active{color:var(--rev-text);background:transparent}
+.bottom-navigation button.active:before{display:none}
+.bottom-navigation button svg{width:23px;height:23px}
+.layout{max-width:880px; margin-top:16px; padding-inline:16px}
+.main{gap:13px}
+.main .post{max-height:none}
+.main .post>p{max-height:none;overflow:visible;line-height:1.6}
+.main .post .post-media{max-height:none}
+.post-media img,.post-media video{max-height:min(65dvh,690px)}
+.primary,.auth-submit{background:var(--rev-text);color:var(--rev-surface);border-radius:10px}
+.primary:hover,.auth-submit:hover{filter:brightness(1.16)}
+.outline,.add-friend-button{background:var(--rev-surface);color:var(--rev-secondary);border-color:var(--rev-border)}
+.friend,.post,.page-card{border-radius:15px}
+.avatar,.avatar.large,.avatar.big,.avatar.giant{border-radius:50%;background:var(--rev-soft);border-color:var(--rev-surface);color:var(--rev-text)}
+.daily-verse{background:var(--rev-surface);border:1px solid var(--rev-border);border-left:4px solid var(--rev-gold)}
+.daily-verse blockquote,.post-head strong,.section-heading h1,.page-title h1{color:var(--rev-text)}
+.post-actions button,.post-stats,.friend small,.community small{color:var(--rev-secondary)}
+.friends-tabs button.active{background:var(--rev-soft);color:var(--rev-text)}
+.friends-tabs button.active:after{background:var(--rev-gold)}
+.conversation-panel{background:var(--rev-background)}
+.conversation-list button{border-color:var(--rev-border)}
+.conversation-list button.selected{background:var(--rev-soft)}
+.conversation-messages{justify-content:flex-start}
+.chat-bubble{background:var(--rev-soft);color:var(--rev-text)}
+input,textarea,select{accent-color:var(--rev-secondary)}
+input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--rev-gold);outline-offset:2px}
+@media(max-width:760px){
+  .top-inner{height:80px;padding-inline:16px}
+  .top-inner .brand{font-size:40px}
+  .header-create,.header-alert{width:48px;height:48px}
+  .layout{width:100%;max-width:600px;margin:0 auto;padding:16px 16px 0}
+  .main{gap:13px}
+  .main .post{padding:16px;max-height:none}
+  .post-media,.post-media img,.post-media video{max-height:none}
+  .bottom-navigation{padding:7px 8px calc(6px + env(safe-area-inset-bottom))}
+  .bottom-navigation button{min-height:54px}
+  .app{padding-bottom:90px}
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --rev-background:#101820;--rev-surface:#192631;--rev-text:#E5EDF4;
+    --rev-secondary:#A7C0B2;--rev-muted:#A0B0BB;--rev-border:#31404B;
+    --rev-soft:#243A38;color-scheme:dark;
+  }
+  .auth-shell{background:var(--rev-background)}
+  .auth-card,.auth-card input,.auth-handle-field input,.auth-password-field input{background:var(--rev-surface);color:var(--rev-text);border-color:var(--rev-border)}
+  .auth-card p,.auth-card label,.auth-intro,.auth-subtitle{color:var(--rev-secondary)}
+  .auth-logo,.auth-card h1{color:var(--rev-text)}
+  .card,.page-card,.post,.publication-modal,.friend,.community,.notification,.create-menu{box-shadow:none}
+  .compose-line textarea,.search,.post-media,.friend-search,.friend-search input,
+  .post-comments input,.chat-form input,.edit-form input,.edit-form textarea,
+  .conversation-panel,.publication-preview{background:var(--rev-background);color:var(--rev-text);border-color:var(--rev-border)}
+  .post-head strong,.post>p,.card-title strong,.inner-heading,.friends-bar h2,
+  .conversation-header,.conversation-list strong,.page-title h1{color:var(--rev-text)}
+  .conversation-header,.conversations,.conversation-list,.chat-form,.post-actions,
+  .friends-tabs,.page-title{border-color:var(--rev-border)}
+  .friend-search,.add-friend-panel,.verse-preferences,.testimonial,.post-comments,.profile-banner{background:var(--rev-surface);color:var(--rev-text);border-color:var(--rev-border)}
+  .post-actions button,.friend-follow,.chat-empty,.chat-empty small{color:var(--rev-secondary)}
+  .primary,.auth-submit{background:var(--rev-text);color:var(--rev-background)}
+}

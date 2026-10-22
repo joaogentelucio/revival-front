@@ -3,4 +3,5 @@ import ReactDOM from 'react-dom/client'
 import AuthGate from './AuthGate'
 import './styles.css'
 import './auth.css'
+import './mobile-parity.css'
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><AuthGate /></React.StrictMode>)

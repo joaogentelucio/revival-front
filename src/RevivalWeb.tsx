@@ -1,5 +1,5 @@
 import {useCallback,useEffect,useRef,useState,type FormEvent} from 'react'
-import {ArrowLeft,Bell,Camera,Check,FileText,Heart,ImagePlus,MessageCircle,Plus,Search,Send,Settings,Smile,Trash2,Users,Video,X} from 'lucide-react'
+import {ArrowLeft,Bell,Heart,ImagePlus,MessageCircle,Plus,Search,Send,Settings,Smile,Trash2,Users,X} from 'lucide-react'
 import {social,uploadFile,mediaUrl,type Person,type Post,type Comment,type Community,type Conversation,type ChatMessage,type Alert} from './services/socialApi'
 import {activateWebPush,restoreWebPush,removeWebPush} from './services/webPush'
 import {bibleSource} from './services/bibleService'

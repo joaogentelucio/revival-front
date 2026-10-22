@@ -1,4 +1,4 @@
-import {getToken} from './authService'
+import {getToken,refreshAccessToken} from './authService'
 const BASE=(import.meta.env.VITE_API_URL || '').replace(/\/$/,'')
 export type Person={id:string;name:string;handle:string;biography?:string|null;followsYou?:boolean;following?:number;followers?:number}
 export type Post={id:string;authorId:string;authorName:string;authorHandle:string;text:string|null;createdAt:string;visibility:string;likes:number;liked:boolean;comments:number;media?:{url:string;category:string}[]}
@@ -11,18 +11,19 @@ export type Alert={id:string;actorId:string|null;kind:string;dataJson:string;cre
 export class ApiError extends Error{constructor(public status:number,message:string){super(message)}}
 export async function request<T=unknown>(path:string,options:RequestInit={}):Promise<T>{
  if(!BASE)throw new Error('Configure VITE_API_URL para conectar o Revival ao backend.')
- const token=getToken()
- if(!token)throw new ApiError(401,'Sua sessão expirou. Entre novamente.')
+ let token=getToken()
+ if(!token)token=await refreshAccessToken()
+ const send=(value:string)=>fetch(BASE+path,{...options,headers:{...(options.body?{'Content-Type':'application/json'}:{}),Authorization:'Bearer '+value,...options.headers}})
  let response:Response
- try{response=await fetch(BASE+path,{...options,headers:{...(options.body?{'Content-Type':'application/json'}:{}),Authorization:'Bearer '+token,...options.headers}})}
- catch{throw new Error('Não foi possível conectar ao servidor. Tente novamente.')}
+ try{response=await send(token);if(response.status===401)response=await send(await refreshAccessToken())}
+ catch(e){if(e instanceof Error&&e.message.includes('sessão'))throw e;throw new Error('Não foi possível conectar ao servidor. Tente novamente.')}
  if(!response.ok){const data=await response.json().catch(()=>null) as {error?:string;title?:string}|null;throw new ApiError(response.status,data?.error||(response.status===401?'Sua sessão expirou. Entre novamente.':data?.title||'Erro na API ('+response.status+').'))}
  if(response.status===204)return undefined as T
  return response.json() as Promise<T>
 }
 const json=(data:unknown)=>JSON.stringify(data)
 const normalizePosts=(items:Post[]):Post[]=>items.map(post=>{const raw=(post as Post&{media?:unknown}).media;let media:unknown=raw;if(typeof media==='string'){try{media=JSON.parse(media)}catch{media=[]}}return {...post,media:Array.isArray(media)?media.filter((item):item is {url:string;category:string}=>!!item&&typeof item.url==='string'&&typeof item.category==='string'):[]}})
-export const uploadFile=async(category:'image-pub'|'video-pub'|'avatar'|'background-photo',file:File)=>{const token=getToken();if(!token)throw new Error('Entre novamente.');const form=new FormData();form.append('file',file);const response=await fetch(BASE+'/api/v1/uploads/'+category,{method:'POST',headers:{Authorization:'Bearer '+token},body:form});if(!response.ok){const body=await response.json().catch(()=>null) as {error?:string}|null;throw new Error(body?.error||'Erro no envio do arquivo ('+response.status+').')}return response.json() as Promise<{id:string;url:string;category:string}>}
+export const uploadFile=async(category:'image-pub'|'video-pub'|'avatar'|'background-photo',file:File)=>{let token=getToken()||await refreshAccessToken();const form=new FormData();form.append('file',file);const send=(value:string)=>fetch(BASE+'/api/v1/uploads/'+category,{method:'POST',headers:{Authorization:'Bearer '+value},body:form});let response=await send(token);if(response.status===401){token=await refreshAccessToken();response=await send(token)}if(!response.ok){const body=await response.json().catch(()=>null) as {error?:string}|null;throw new Error(body?.error||'Erro no envio do arquivo ('+response.status+').')}return response.json() as Promise<{id:string;url:string;category:string}>}
 export const mediaUrl=(url:string)=>BASE+url
 export const social={
  feed:async(authorId?:string)=>normalizePosts(await request<Post[]>('/api/v1/posts?take=100'+(authorId?'&authorId='+encodeURIComponent(authorId):''))),

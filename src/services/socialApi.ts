@@ -1,6 +1,6 @@
 import {getToken,refreshAccessToken} from './authService'
 const BASE=(import.meta.env.VITE_API_URL || '').replace(/\/$/,'')
-export type Person={id:string;name:string;handle:string;biography?:string|null;followsYou?:boolean;following?:number;followers?:number}
+export type Person={id:string;name:string;handle:string;biography?:string|null;avatarUrl?:string|null;backgroundUrl?:string|null;isOnline?:boolean;followsYou?:boolean;following?:number;followers?:number}
 export type Post={id:string;authorId:string;authorName:string;authorHandle:string;text:string|null;createdAt:string;visibility:string;likes:number;liked:boolean;comments:number;media?:{url:string;category:string}[]}
 export type PostLiker={id:string;name:string;handle:string;following:boolean}
 export type Comment={id:string;authorId:string;authorName:string;text:string;parentId:string|null;createdAt:string}
@@ -36,7 +36,7 @@ export const social={
  discover:(q='')=>request<Person[]>('/api/v1/users/discover?q='+encodeURIComponent(q)+'&take=100'),
  search:(q:string)=>request<Person[]>('/api/v1/profiles?q='+encodeURIComponent(q)+'&limit=50'),
  profile:(handle:string)=>request<Person>('/api/v1/profiles/'+encodeURIComponent(handle)),
- editProfile:(name:string,biography:string)=>request<void>('/api/v1/profiles/me',{method:'PUT',body:json({name,biography})}),
+ editProfile:(name:string,biography:string,uploads?:{avatarUploadId?:string; backgroundUploadId?:string})=>request<void>('/api/v1/profiles/me',{method:'PUT',body:json({name,biography,...uploads})}),
  follow:(id:string)=>request<void>('/api/v1/profiles/'+id+'/follow',{method:'POST'}),
  publicConnections:(userId:string,kind:'following'|'followers')=>request<Person[]>('/api/v1/users/'+encodeURIComponent(userId)+'/'+kind),
  following:()=>request<Person[]>('/api/v1/users/me/following'),

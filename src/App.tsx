@@ -120,8 +120,3 @@ export default function App({authenticatedName,authenticatedHandle,authenticated
  </div>
 }
 function conversationName(c:Conversation){try{const p=typeof c.participants==='string'?JSON.parse(c.participants):c.participants;return Array.isArray(p)?p.map((x:{name:string})=>x.name).join(', ')||'Conversa':'Conversa'}catch{return 'Conversa'}}
-function SearchResults({query,onFollow,onChat,onView}:{query:string;onFollow:(p:Person)=>Promise<void>;onChat:(p:Person)=>Promise<void>;onView:(p:Person)=>Promise<void>}){
- const [results,setResults]=useState<Person[]>([]),[loading,setLoading]=useState(true),[error,setError]=useState('')
- useEffect(()=>{let active=true;setLoading(true);social.search(query.trim().replace(/^@/,'')).then(items=>{if(active)setResults(items)}).catch(e=>{if(active)setError(e instanceof Error?e.message:'Falha na busca.')}).finally(()=>{if(active)setLoading(false)});return()=>{active=false}},[query])
- return <section className="user-search-results"><h2>Pessoas encontradas</h2><ErrorText error={error}/>{loading?<p>Buscando pessoas...</p>:results.length===0?<p className="no-users-found">Nenhum usuário encontrado.</p>:<div className="user-search-grid">{results.map(p=><div className="user-search-result" key={p.id}><Avatar label={p.name}/><div><strong>{p.name}</strong><small>@{p.handle}</small></div><button className="outline" onClick={()=>void onView(p)}>Perfil</button><button className="outline" onClick={()=>void onFollow(p)}>Seguir</button><button className="outline" onClick={()=>void onChat(p)}>Conversar</button></div>)}</div>}</section>
-}

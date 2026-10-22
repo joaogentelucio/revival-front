@@ -79,3 +79,42 @@ input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px soli
   .post-actions button,.friend-follow,.chat-empty,.chat-empty small{color:var(--rev-secondary)}
   .primary,.auth-submit{background:var(--rev-text);color:var(--rev-background)}
 }
+
+/* Mobile-native inspired inbox, discover and conversation layout */
+.recados-search{width:100%;max-width:560px;margin:0 auto 16px;background:var(--rev-surface);border:1px solid var(--rev-border);border-radius:24px;min-height:50px;color:var(--rev-secondary)}
+.recados-search input{background:transparent;color:var(--rev-text);min-height:48px}
+.recados-search input::placeholder{color:var(--rev-muted)}
+.recados-search-row{display:flex;justify-content:center}
+.friends-tabs-reordered{border-color:var(--rev-border);padding-bottom:10px;gap:8px}
+.friends-tabs-reordered>button:not(.friends-tab-button){flex:1;min-height:48px;justify-content:center;border-radius:0;font-size:13px;background:transparent}
+.friends-tabs-reordered>button:not(.friends-tab-button).active{background:transparent;border-bottom:2px solid var(--rev-text)}
+.friends-tabs-reordered>button:not(.friends-tab-button).active:after{display:none}
+.friends-tabs-reordered .friends-tab-button{background:transparent;color:var(--rev-text);border:0;border-radius:10px;min-width:46px}
+.conversation-inbox{display:flex;flex-direction:column;gap:11px}
+.inbox-contact{display:flex;align-items:center;gap:12px;text-align:left;width:100%;padding:14px 16px;min-height:78px;border:1px solid var(--rev-border);border-radius:15px;background:var(--rev-surface);color:var(--rev-text)}
+.inbox-contact:hover{background:var(--rev-soft)}
+.inbox-contact .inbox-contact-content{min-width:0;flex:1}
+.inbox-contact .inbox-contact-content strong{color:var(--rev-text);font-weight:800}
+.inbox-contact .inbox-contact-content small{color:var(--rev-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.inbox-time{color:var(--rev-secondary);font-size:11px;flex-shrink:0}
+.friend-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.friend{min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:23px 12px 15px;gap:12px}
+.friend .avatar{width:49px;height:49px}
+.friend strong{font-size:14px;text-align:center;color:var(--rev-text)}
+.friend .friend-icon-actions{margin-top:auto;display:flex;justify-content:center;gap:10px}
+.friend-icon-button{width:46px;height:46px;display:grid;place-items:center;background:transparent;border:1px solid var(--rev-border);border-radius:14px;color:var(--rev-secondary)}
+.friend-icon-button:hover{background:var(--rev-soft)}
+.chat-page{min-height:min(650px,calc(100dvh - 200px));display:flex;flex-direction:column;overflow:hidden}
+.chat-page-header{background:var(--rev-surface);color:var(--rev-text);border-bottom:1px solid var(--rev-border)}
+.chat-page-messages{flex:1;min-height:220px;max-height:calc(100dvh - 310px);overflow-y:auto;overscroll-behavior:contain;padding:16px;scrollbar-width:thin;scrollbar-color:var(--rev-secondary) transparent}
+.chat-page-messages .chat-bubble{max-width:88%;width:fit-content;margin-bottom:9px}
+.chat-form{background:var(--rev-surface);border-top:1px solid var(--rev-border)}
+.chat-form input{background:var(--rev-background);color:var(--rev-text)}
+.community{background:var(--rev-surface);border-color:var(--rev-border)}
+@media(max-width:760px){
+ .friends-hub{padding:0;border:none;background:transparent}
+ .friends-tabs-reordered{gap:4px}
+ .friends-tabs-reordered>button:not(.friends-tab-button){padding:10px 3px}
+ .friend-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .chat-page{min-height:calc(100dvh - 185px)}
+}

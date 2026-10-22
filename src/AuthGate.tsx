@@ -1,6 +1,6 @@
 import {useEffect,useState,type FormEvent} from 'react'
 import {authApi,clearSession,getToken,saveSession,logoutSession,type AuthUser} from './services/authService'
-import App from './App'
+import App from './RevivalWeb'
 import {removeWebPush} from './services/webPush'
 import { Eye, EyeOff, Dices } from 'lucide-react'
 
